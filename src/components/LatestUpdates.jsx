@@ -193,7 +193,7 @@ export default function LatestUpdates({ darkMode = false }) {
 
       {/* ══════════════ DESKTOP ══════════════ */}
       <div className={`hidden md:flex md:flex-col w-full h-screen overflow-hidden ${bg}`}>
-        <div className="w-full max-w-[1500px] mx-auto px-6 py-5 flex flex-col flex-1 min-h-0">
+        <div className="w-full max-w-[1548px] mx-auto px-6 py-5 flex flex-col flex-1 min-h-0">
           <Header />
 
           <div

@@ -1,30 +1,23 @@
 import { useState } from "react";
-import brandImage from "../assets/rethink-ways-brand-story.jpg";
-import brandImageMobile from "../assets/rethink-ways-mobile.jpeg";
+import brandImage from "../assets/rethink-ways-brand-story.webp";
+
 import arrow from "../assets/rethink-ways-travel-arrow.svg";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 
-// Expands on parent `group` hover — same as LatestUpdates ExpandBtn
 const ExpandBtn = ({ href }) => (
   <a
     href={href}
     onClick={(e) => e.stopPropagation()}
-    className="relative flex items-center h-[44px] w-[44px] rounded-full bg-[#D02525] border-2 border-[#D02525] text-white overflow-hidden transition-all duration-[650ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:w-[160px] group-hover:bg-black group-hover:border-[#D02525]"
+    className="inline-flex items-center gap-3 h-[44px] px-5 rounded-full bg-[#D02525] border-2 border-[#D02525] text-white text-[14px] font-semibold transition-colors duration-300 group-hover:bg-black group-hover:border-[#D02525]"
+    style={{ fontFamily: "Poppins, sans-serif" }}
   >
-    <span className="flex items-center justify-center w-[44px] h-[44px] shrink-0">
-      <img
-        src={arrow}
-        alt=""
-        aria-hidden="true"
-        className="w-[22px] h-[22px] brightness-0 invert transition-all duration-500 rotate-[-45deg] group-hover:rotate-0 group-hover:translate-x-[4px]"
-      />
-    </span>
-    <span
-      className="absolute left-[52px] whitespace-nowrap text-[14px] font-semibold opacity-0 -translate-x-[10px] transition-all duration-[650ms] group-hover:opacity-100 group-hover:translate-x-0"
-      style={{ fontFamily: "Poppins, sans-serif" }}
-    >
-      READ MORE
-    </span>
+    <img
+      src={arrow}
+      alt=""
+      aria-hidden="true"
+      className="w-[18px] h-[18px] rotate-[-45deg] brightness-0 invert transition-transform duration-300 group-hover:rotate-0"
+    />
+    READ MORE
   </a>
 );
 
@@ -50,7 +43,7 @@ export default function BrandStory({ darkMode }) {
   const sub      = "Discover how Tourist 360 crafts dream honeymoons in the Maldives for couples across South India.";
 
   return (
-    <section className="w-full md:max-w-[1500px] mx-auto px-0 md:px-4">
+    <section className="w-full md:max-w-[1532px] mx-auto px-0 md:px-4">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-6 md:mb-10 px-4 md:px-0">
@@ -82,13 +75,11 @@ export default function BrandStory({ darkMode }) {
             alt="Tourist 360 luxury Maldives honeymoon specialist brand story banner"
             className="w-full h-[350px] object-cover object-top"
           />
-          {/* tag */}
           <a href={tagLink}>
             <span className="absolute top-0 left-[11px] bg-red-600 text-white text-[10px] px-2 py-1 uppercase font-semibold tracking-wider z-20">
               BRAND STORY
             </span>
           </a>
-          {/* bookmark */}
           <div
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBookmark(!bookmark); }}
             role="button"
@@ -99,7 +90,6 @@ export default function BrandStory({ darkMode }) {
           </div>
         </div>
 
-        {/* text block below image — matches Banner mobile */}
         <div className={`px-4 pt-5 pb-6 ${darkMode ? "bg-[#0a0a0a]" : "bg-white"}`}>
           <h1 className={`text-[28px] leading-[1.35] font-['Yeseva_One'] text-center mb-2 ${darkMode ? "text-white" : "text-[#1a1a1a]"}`}>
             {headline}
@@ -128,14 +118,14 @@ export default function BrandStory({ darkMode }) {
             {/* light gradient */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/0 rounded-[16px]" />
 
-            {/* tag — top-left, matches Banner */}
+            {/* tag — top-left */}
             <a href={tagLink} onClick={(e) => e.stopPropagation()}>
               <span className="absolute top-0 left-10 bg-red-600 text-white text-[14px] font-semibold uppercase px-2 py-[3px] z-20 tracking-wider">
                 BRAND STORY
               </span>
             </a>
 
-            {/* bookmark — top-right, matches Banner */}
+            {/* bookmark — top-right */}
             <div
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBookmark(!bookmark); }}
               role="button"
@@ -145,16 +135,15 @@ export default function BrandStory({ darkMode }) {
               {bookmark ? <FaBookmark className="text-red-600 text-[14px]" /> : <FaRegBookmark className="text-red-600 text-[14px]" />}
             </div>
 
-            {/* text overlay — left aligned like Banner */}
-            <div className="absolute left-10 top-1/2 -translate-y-1/2 max-w-[820px] text-white z-30 pointer-events-none">
-              <h1 className="text-[42px] lg:text-[58px] leading-[1.2] font-['Yeseva_One']">
+            {/* text overlay — left aligned, vertically centered */}
+            <div className="absolute left-10 top-1/2 -translate-y-1/2 max-w-[820px] text-white z-30">
+              <h1 className="text-[42px] lg:text-[58px] leading-[1.2] font-['Yeseva_One'] pointer-events-none">
                 {headline}
               </h1>
-            </div>
-
-            {/* button — bottom-right */}
-            <div className="absolute bottom-6 right-6 z-30" style={{ pointerEvents: "auto" }}>
-              <ExpandBtn href={link} />
+              {/* button sits directly below the title */}
+              <div className="mt-6" style={{ pointerEvents: "auto" }}>
+                <ExpandBtn href={link} />
+              </div>
             </div>
 
           </div>

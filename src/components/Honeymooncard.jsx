@@ -5,9 +5,9 @@ import arrow from "../assets/rethink-ways-travel-arrow.svg";
 import card1 from "../assets/rethink-ways-bali-honeymoon.webp";
 import card2 from "../assets/rethink-ways-valentine's-travel.webp";
 import card3 from "../assets/rethink-ways-maldives-honeymoon.webp";
-import card4 from "../assets/rethink-ways-best-honeymoon.jpg";
+import card4 from "../assets/rethink-ways-best-honeymoon.webp";
 import card5 from "../assets/rethink-ways-love-in-every.webp";
-import card6 from "../assets/rethink-ways-india's-enchannting.jpg";
+import card6 from "../assets/rethink-ways-india's-enchannting.webp";
 
 const sections = [
 {

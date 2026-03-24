@@ -61,6 +61,7 @@ function Header({ onDarkModeChange }) {
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", fn, { passive: true });
+    fn(); // run once on mount to catch already-scrolled state
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
@@ -207,24 +208,50 @@ function Header({ onDarkModeChange }) {
 
       {/* DESKTOP sticky nav */}
       <div className={`sticky top-0 z-50 hidden lg:block transition-colors duration-300 [font-family:Poppins,sans-serif] ${
-        scrolled ? (darkMode ? "bg-[#1a1a1a]" : "bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] border-b border-[#e5e5e5]") : "bg-[#212121]"
+        scrolled
+          ? darkMode
+            ? "bg-[#1a1a1a]"
+            : "bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] border-b border-[#e5e5e5]"
+          : "bg-[#212121]"
       }`}>
         <div className="mx-auto max-w-[1350px] px-4">
-          <div className="flex h-[54px] items-center">
 
-            <div style={{ width: scrolled ? "148px" : "0px", opacity: scrolled ? 1 : 0, marginRight: scrolled ? "16px" : "0px", flexShrink: 0, overflow: "hidden", transition: "width 300ms ease, opacity 300ms ease, margin 300ms ease" }}>
+          {/* Navbar row: height 54px → 72px on scroll */}
+          <div
+            style={{ transition: "height 400ms cubic-bezier(0.4,0,0.2,1)" }}
+            className={`flex items-center ${scrolled ? "h-[77px]" : "h-[50px]"}`}
+          >
+
+            {/* Logo: slides in + expands when scrolled */}
+            <div
+              style={{
+                width: scrolled ? "180px" : "0px",
+                opacity: scrolled ? 1 : 0,
+                marginRight: scrolled ? "20px" : "0px",
+                flexShrink: 0,
+                overflow: "hidden",
+                transition: "width 400ms cubic-bezier(0.4,0,0.2,1), opacity 400ms ease, margin 400ms ease",
+              }}
+            >
               <a href={headerLinks.home} target="_self" rel="noopener noreferrer">
-                <img src={logo} alt="Travel Rethink Ways Logo" className="h-auto w-[128px] object-contain" />
+                <img
+                  src={logo}
+                  alt="Travel Rethink Ways Logo"
+                  style={{ width: "160px", height: "auto", objectFit: "contain", display: "block" }}
+                />
               </a>
             </div>
 
+            {/* Nav links */}
             <nav className="flex flex-1 items-center justify-between">
               {headerMainMenu.map((item) => (
-                <a key={item.label} href={item.href} target="_self" rel="noopener noreferrer" className={`${NAV_LINK} ${navCol}`}>
+                <a key={item.label} href={item.href} target="_self" rel="noopener noreferrer"
+                  className={`${NAV_LINK} ${navCol}`}>
                   {item.label}
                 </a>
               ))}
-              <a href={headerLinks.wishlist} target="_self" rel="noopener noreferrer" className={`flex items-center gap-1.5 ${NAV_LINK} ${navCol}`}>
+              <a href={headerLinks.wishlist} target="_self" rel="noopener noreferrer"
+                className={`flex items-center gap-1.5 ${NAV_LINK} ${navCol}`}>
                 <i className="fa-solid fa-heart text-[#f70d28]" /> Wishlist
               </a>
               <div className="group relative">
@@ -242,12 +269,25 @@ function Header({ onDarkModeChange }) {
               </div>
             </nav>
 
-            <div style={{ opacity: scrolled ? 1 : 0, width: scrolled ? "auto" : "0px", marginLeft: scrolled ? "16px" : "0px", pointerEvents: scrolled ? "auto" : "none", flexShrink: 0, overflow: "hidden", transition: "width 300ms ease, opacity 300ms ease, margin 300ms ease" }}
-              className="flex items-center gap-3">
+            {/* Search + dark toggle: slides in when scrolled */}
+            <div
+              style={{
+                opacity: scrolled ? 1 : 0,
+                width: scrolled ? "auto" : "0px",
+                marginLeft: scrolled ? "16px" : "0px",
+                pointerEvents: scrolled ? "auto" : "none",
+                flexShrink: 0,
+                overflow: "hidden",
+                transition: "width 400ms cubic-bezier(0.4,0,0.2,1), opacity 400ms ease, margin 400ms ease",
+              }}
+              className="flex items-center gap-3"
+            >
               <form onSubmit={onSearch} className={`flex h-[34px] items-center gap-2 rounded-full border px-4 ${scrolled && !darkMode ? "border-[#ddd] bg-[#f5f5f5]" : "border-[#444] bg-[#111]"}`}>
                 <input value={query} onChange={(e) => setQuery(e.target.value)} type="text" placeholder="Search..."
                   className={`w-[120px] border-0 bg-transparent text-[13px] outline-none ${scrolled && !darkMode ? "text-[#222] placeholder:text-[#999]" : "text-white placeholder:text-white/40"}`} />
-                <button type="submit" className={`transition-colors ${scrolled && !darkMode ? "text-[#555] hover:text-[#111]" : "text-white/70 hover:text-white"}`} aria-label="Search">
+                <button type="submit"
+                  className={`transition-colors ${scrolled && !darkMode ? "text-[#555] hover:text-[#111]" : "text-white/70 hover:text-white"}`}
+                  aria-label="Search">
                   <i className="fa-solid fa-magnifying-glass text-[12px]" />
                 </button>
               </form>

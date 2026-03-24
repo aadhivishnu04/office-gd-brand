@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
-import img from "../assets/rethinkways-blog-visa-free-destination-cover.jpg";
+import img from "../assets/rethinkways-blog-visa-free-destination-cover.webp";
 import arrow from "../assets/rethink-ways-travel-arrow.svg";
 
 export default function VisaFreeEscapes({ darkMode }) {

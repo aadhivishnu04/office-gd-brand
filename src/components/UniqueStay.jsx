@@ -1,5 +1,5 @@
 import { useState } from "react";
-import poolImg from "../assets/rethinkways-blog-boutique-kerala-cover.jpg";
+import poolImg from "../assets/rethinkways-blog-boutique-kerala-cover.webp";
 import arrow from "../assets/rethink-ways-travel-arrow.svg";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 

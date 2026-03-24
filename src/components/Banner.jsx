@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import arrow from "../assets/rethink-ways-travel-arrow.svg";
 
-import slide1 from "../assets/rethink-ways-best-travel-deals-2026.jpg";
-import slide2 from "../assets/rethink-ways-maldives-honeymoon-banner.jpg";
-import slide3 from "../assets/rethink-ways-30-best-places-india.jpg";
-import slide4 from "../assets/rethink-ways-India-travel-deals-2026.jpg";
-import slide5 from "../assets/rethink-ways-visa-free-thailand.jpg";
+import slide1 from "../assets/rethink-ways-best-travel-deals-2026.webp";
+import slide2 from "../assets/rethink-ways-maldives-honeymoon-banner.webp";
+import slide3 from "../assets/rethink-ways-30-best-places-india.webp";
+import slide4 from "../assets/rethink-ways-India-travel-deals-2026.webp";
+import slide5 from "../assets/rethink-ways-visa-free-thailand.webp";
 
 const slides = [
   { image: slide1, title: "Best Travel Deals 2026: International Vacation Offers| Travel Rethink Ways", tag: "INDIA 2026", link: "https://travel.rethinkways.com/international-travel-deals-2026/" },
@@ -28,7 +28,7 @@ const StaticPill = ({ label, href }) => (
   <a href={href} onClick={(e) => e.stopPropagation()}
     className="group/pill inline-flex items-center gap-3 h-[44px] px-5 rounded-full bg-[#D02525] border-2 border-[#D02525] text-white text-[14px] font-semibold transition-colors duration-300 group-hover:bg-black group-hover:border-[#D02525]"
     style={{ fontFamily: "Poppins, sans-serif" }}>
-    <img src={arrow} alt="" className="w-[18px] h-[18px] rotate-[-45deg] transition-transform duration-300 group-hover:rotate-0" />
+    <img src={arrow} alt="" className="w-[18px] h-[18px] rotate-[-45deg] brightness-0 invert transition-transform duration-300 group-hover:rotate-0" />
     {label}
   </a>
 );
@@ -53,12 +53,23 @@ export default function Banner({ darkMode }) {
   return (
     <div className={`w-full sm:max-w-[1548px] mx-auto px-0 sm:px-4 lg:px-6 lg:mt-[4px] transition-colors duration-300 ${darkMode ? "bg-[#0a0a0a]" : "bg-white"}`}>
 
-      {/* MOBILE */}
-      <a href={link} className="block md:hidden">
+      {/* MOBILE — div instead of <a> to avoid nested anchor error */}
+      <div className="block md:hidden cursor-pointer" onClick={() => window.location.href = link}>
         <div className="relative w-full h-[350px] overflow-hidden">
           {slides.map((s, i) => (
-            <img key={i} src={s.image} alt={s.title}
-              className={`absolute inset-0 w-full h-full object-cover object-right transition-opacity duration-700 ease-in-out ${i === active ? "opacity-100 z-10" : "opacity-0 z-0"}`} />
+            <img
+  key={i}
+  src={s.image}
+  alt={s.title}
+  width="1600"
+  height="900"
+  loading={i === active ? "eager" : "lazy"}
+  fetchpriority={i === active ? "high" : "auto"}
+  decoding="async"
+  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+    i === active ? "opacity-100 z-10" : "opacity-0 z-0"
+  }`}
+/>
           ))}
           <span className="absolute top-0 left-0 bg-[#D02525] text-white text-[12px] font-semibold uppercase px-3 py-[4px] z-20 tracking-wider">{tag}</span>
           <button onClick={(e) => { stopProp(e); setBookmark(!bookmark); }}
@@ -72,12 +83,43 @@ export default function Banner({ darkMode }) {
             ))}
           </div>
         </div>
-        <div className={`px-4 pt-5 pb-6 ${darkMode ? "bg-[#0a0a0a]" : "bg-white"}`}>
-          <h1 className={`text-[28px] leading-[1.35] font-['Yeseva_One'] text-center mb-2 ${darkMode ? "text-white" : "text-[#1a1a1a]"}`}>{headline}</h1>
-          {sub && <p className={`text-[20px] text-center mb-4 ${darkMode ? "text-gray-400" : "text-[#5B5F62]"}`} style={{ fontFamily: "Poppins, sans-serif" }}>{sub}</p>}
-          <div className="flex justify-center mt-3"><StaticPill label={cta} href={link} /></div>
+        {/* fixed-height caption — darkMode aware, button pinned to bottom */}
+        <div
+          className="px-4 pt-5 pb-5"
+          style={{
+            height: "240px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "hidden",
+            backgroundColor: darkMode ? "#1a1a1a" : "#f2f2f2",
+          }}
+        >
+          <h1
+            className="text-[26px] leading-[1.35] font-['Yeseva_One'] text-center w-full mb-2"
+            style={{ flexShrink: 0, color: darkMode ? "#ffffff" : "#1a1a1a" }}
+          >
+            {headline}
+          </h1>
+          {sub && (
+            <p
+              className="text-[14px] leading-[1.5] text-center w-full"
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                flexShrink: 0,
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                color: darkMode ? "#aaaaaa" : "#5B5F62",
+              }}
+            >
+              {sub}
+            </p>
+          )}
+          <div className="mt-auto"><StaticPill label={cta} href={link} /></div>
         </div>
-      </a>
+      </div>
 
       {/* DESKTOP */}
       <div className="hidden md:block relative group">

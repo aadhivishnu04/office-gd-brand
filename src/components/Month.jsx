@@ -1,5 +1,5 @@
 import { useState } from "react";
-import indiaImage from "../assets/india.jpg";
+import indiaImage from "../assets/india.webp";
 import arrow from "../assets/Travel_arrow.svg";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 

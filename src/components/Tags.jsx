@@ -49,7 +49,7 @@ const tags = [
 // No changes needed to individual tag styles — they use inline style colors which are readable on dark bg
 export default function Tags({ darkMode }) {
   return (
-    <div className="w-full max-w-[1530px] mx-auto px-4 mt-8 flex flex-wrap justify-center sm:justify-start gap-[8px] sm:gap-[12px] md:gap-[14px] font-[Poppins,Helvetica,Arial,sans-serif]">
+    <div className="w-full max-w-[1500px] mx-auto px-4 mt-8 flex flex-wrap justify-center sm:justify-start gap-[8px] sm:gap-[12px] md:gap-[14px] font-[Poppins,Helvetica,Arial,sans-serif]">
 
       {tags.map(({ icon, text, bg, color, link }, i) => (
         <a key={i} href={link}>
