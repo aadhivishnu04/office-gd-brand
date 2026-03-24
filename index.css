@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* ✅ Fix - remove dark: from @apply, use regular CSS instead */
+body {
+  font-family: 'Poppins', sans-serif;
+  @apply bg-white text-black;
+}
+
+body.dark {
+  background-color: #0e0908;
+  color: white;
+}
